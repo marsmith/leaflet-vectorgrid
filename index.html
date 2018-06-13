@@ -29,6 +29,7 @@
 		}).addTo(map);
 
 		var vectorGrid = L.vectorGrid.slicer( points, { 
+			rendererFactory: L.canvas.tile,
 			vectorTileLayerStyles: {
 				sliced: function(properties, zoom) {
 
