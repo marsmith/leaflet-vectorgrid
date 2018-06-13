@@ -3,7 +3,7 @@
 <html>
 <head>
 
-	<title>Leaflet.GridLayer.Vector.Slicer demo</title>
+	<title>Leaflet VectorGrid</title>
 	<meta charset="utf-8" />
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,35 +54,15 @@
 					}
 				}
 			},
-			interactive: true,
-			getFeatureId: function(f) {
-				return f.properties.site_id;
-			}
+			//interactive: true
 		})
 		.on('click', function(e) {
-			var properties = e.layer.properties;
-			console.log(e.layer.properties)
+			// var properties = e.layer.properties;
+			// console.log(e.layer.properties)
 			// L.popup()
 			// 	.setContent(properties.name || properties.type)
 			// 	.setLatLng(e.latlng)
 			// 	.openOn(map);
-			// clearHighlight();
-			// highlight = properties.wb_a3;
-			// var p = properties.mapcolor7 % 5;
-			// var style = {
-			// 	fillColor: p === 0 ? '#800026' :
-			// 			p === 1 ? '#E31A1C' :
-			// 			p === 2 ? '#FEB24C' :
-			// 			p === 3 ? '#B2FE4C' : '#FFEDA0',
-			// 	fillOpacity: 0.5,
-			// 	fillOpacity: 1,
-			// 	stroke: true,
-			// 	fill: true,
-			// 	color: 'red',
-			// 	opacity: 1,
-			// 	weight: 2,
-			// };
-			// vectorGrid.setFeatureStyle(properties.wb_a3, style);
 		})
 		.addTo(map);
 

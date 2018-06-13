@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>Leaflet L.GeoJSON</title>
+	<meta charset="utf-8" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" />
+
+</head>
+<body style='margin:0'>
+
+	<div id="map" style="width: 100vw; height: 100vh"></div>
+	
+	<script type="text/javascript"  src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
+	<script type="text/javascript" src="./sites.js"></script>
+	<script>
+
+		var map = L.map('map');
+
+		var cartodbAttribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>';
+
+		var positron = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
+			attribution: cartodbAttribution,
+			opacity: 1
+		}).addTo(map);
+
+		var geoJSON = L.geoJSON( points, { 
+			pointToLayer: function (feature, latlng) {
+
+				var state = feature.properties.state_province;
+
+				return L.circleMarker(latlng, {
+					fillColor: state === 'Michigan' ? '#800026' :
+							state === 'Wisconsin' ? '#E31A1C' :
+							state === 'Minnesota' ? '#FEB24C' :
+							state === 'New York' ? '#B2FE4C' :
+							state === 'Ohio' ? '#B2AE4C' :  
+							state === 'Indiana' ? '#A2CE4C' :  
+									'#FFEDA0',  //otherwise
+					fillOpacity: 0.5,
+					opacity: 1,
+					stroke: true,
+					fill: true,
+					weight: 0,
+					radius: 2
+				});
+			}
+		})
+		.on('click', function(e) {
+			var properties = e.layer.feature.properties;
+			console.log(e)
+			L.popup()
+				.setContent(properties.name)
+				.setLatLng(e.latlng)
+				.openOn(map);
+		})
+		.addTo(map);
+		map.setView({ lat: 45, lng: -82 }, 5);
+
+	</script>
+</body>
+</html>
